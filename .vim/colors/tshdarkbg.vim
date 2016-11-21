@@ -1,0 +1,1 @@
+/home/andreatsh/.vim/colors/tshdarkbg.vim
