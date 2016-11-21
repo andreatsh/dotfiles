@@ -1,1 +1,5 @@
-/home/andreatsh/.gitconfig
+[user]
+	name = Andrea Miglietta
+	email = andrea.miglietta92@gmail.com
+[github]
+    user = andreatsh

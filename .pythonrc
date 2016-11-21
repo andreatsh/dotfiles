@@ -1,1 +1,18 @@
-/home/andreatsh/.pythonrc
+# Python startup config file 
+# Created by andreatsh 
+
+import atexit, os 
+import rlcompleter, readline
+
+readline.parse_and_bind('tab:complete')
+historyPath = os.path.expanduser("~/.pyhistory")
+
+def save_history(historyPath=historyPath):
+   readline.write_history_file(historyPath)
+
+if os.path.exists(historyPath):
+   readline.read_history_file(historyPath)
+
+atexit.register(save_history)
+
+
