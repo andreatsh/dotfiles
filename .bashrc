@@ -31,7 +31,6 @@ then
     then
         eval $(dircolors $HOME/.colors)
     else
-		echo nonciao
         eval $(dircolors -b)
     fi
 fi
