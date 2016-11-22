@@ -20,21 +20,21 @@ then
     source /etc/bash_completion
 fi
 
-if [[ -r $HOME/.bash_aliases ]]
+if [[ -r "$HOME/.bash_aliases" ]]
 then
-    source $HOME/.bash_aliases
+    source "$HOME/.bash_aliases"
 fi
 
 if [[ -x /usr/bin/dircolors ]]
 then
-	if [[ -r $HOME/.colors ]]
+	if [[ -r "$HOME/.colors" ]]
     then
-        eval $(dircolors $HOME/.colors)
+        eval "$(dircolors "$HOME/.colors")"
     else
-        eval $(dircolors -b)
+        eval "$(dircolors -b)"
     fi
 fi
 
-export EDITOR='/usr/bin/vim'
-export PYTHONSTARTUP=$HOME/.pythonrc
+export EDITOR="/usr/bin/vim"
+export PYTHONSTARTUP="$HOME/.pythonrc"
 
