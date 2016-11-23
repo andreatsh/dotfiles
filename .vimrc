@@ -48,7 +48,12 @@ endif
 " Load personal colorscheme
 colo tshdarkbg
 
+" Key mapping 
 nnoremap ;b :buffer *
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
 
 augroup Shebang
   autocmd BufNewFile *.sh 0put =\"#!/bin/bash\"|$
