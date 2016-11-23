@@ -12,17 +12,18 @@ let g:colors_name = "tshdarkbg"
 
 
 " highlight group
-" see :help highlight-group
-hi Comment      ctermfg=14     ctermbg=NONE   term=NONE        
+" see :help highlight-groups
+hi Comment      ctermfg=14     ctermbg=NONE   cterm=NONE        
 "hi DiffAdd      ctermfg=0      ctermbg=10     term=NONE 
 "hi DiffChange   ctermfg=0      ctermbg=11     term=NONE 
 "hi DiffDelete   ctermfg=0      ctermbg=9      term=NONE 
 "hi DiffText     ctermfg=0      ctermbg=3      term=NONE 
-hi IncSearch    ctermfg=9      ctermbg=11     term=NONE        
-hi Normal       ctermfg=7      ctermbg=0      term=NONE        
-hi Search       ctermfg=9      ctermbg=11     term=bold,reverse
-hi Visual       ctermfg=NONE   ctermbg=240    term=reverse     
-hi WildMenu     ctermfg=0      ctermbg=11     term=bold        
+hi ErrorMsg     ctermfg=7      ctermbg=9      cterm=bold
+hi IncSearch    ctermfg=9      ctermbg=11     cterm=NONE        
+hi Normal       ctermfg=7      ctermbg=0      cterm=NONE        
+hi Search       ctermfg=11      ctermbg=9      cterm=bold
+hi Visual       ctermfg=NONE   ctermbg=240    cterm=bold     
+hi WildMenu     ctermfg=0      ctermbg=11     cterm=bold        
 
 " syntax highlighting for group-name
 " see :help group-name
