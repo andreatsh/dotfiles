@@ -27,6 +27,7 @@ set showmatch
 
 " Enable wildmenu 
 set wildmenu
+set wildignore+=*.o,*.x
 set wildignore+=*.swp,*.bak
 set wildignorecase
 set wildmode=full
