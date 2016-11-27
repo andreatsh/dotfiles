@@ -1,9 +1,6 @@
 " Make Vim no Vi-compatible
 set nocompatible
 
-" Exec pathogen
-exec pathogen#infect('bundle/{}')
-
 " Enable syntax highlighting on a dark background
 syntax on
 set background=dark
@@ -62,19 +59,5 @@ cnoremap <C-e> <End>
 augroup Shebang
     autocmd BufNewFile *.sh 0put =\"#!/bin/bash\"|$
     autocmd BufNewFile *.py 0put =\"#!/usr/bin/python\"|$
-augroup END
-
-
-" Vimwiki
-" Enable run multiple wikis 
-let g:vimwiki_list = [
-        \{'path': '~/tmp3/vimwiki.wiki'} 
-    \]
-    
-augroup wiki
-    au!
-    au BufEnter *.wiki filetype indent plugin on 
-    au BufEnter *.wiki set filetype=vimwiki
-    au BufLeave *.wiki filetype indent plugin off
 augroup END
 
