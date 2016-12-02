@@ -13,6 +13,7 @@ let g:colors_name = "tshdarkbg"
 
 " highlight group
 " see :help highlight-groups
+hi Colorcolumn                 ctermbg=235
 hi Comment      ctermfg=14     ctermbg=NONE   cterm=NONE        
 "hi DiffAdd      ctermfg=0      ctermbg=10     term=NONE 
 "hi DiffChange   ctermfg=0      ctermbg=11     term=NONE 
