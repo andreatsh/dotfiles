@@ -1,5 +1,5 @@
 " Make Vim no Vi-compatible
-set nocompatible
+set nocompatible 
 
 " Enable syntax highlighting on a dark background
 syntax on
@@ -10,7 +10,10 @@ set autoindent
 set expandtab     
 set shiftwidth=4   
 set tabstop=4      
-"set textwidth=79
+
+" Alignment 
+set colorcolumn=81
+"match ColorColumn "\%80v."
 
 " Incremental and highlight search
 set incsearch
