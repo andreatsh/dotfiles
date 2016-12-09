@@ -22,10 +22,12 @@ xterm*bellIsUrgent:       true
 xterm*bellSuppressTime:   100
 
 xterm*dynamicColors:      true
-xterm*eightBitInput:      true
 xterm*scrollTtyKeypress:  true
 xterm*scrollTtyOutput:    true
 xterm*loginShell:         true
+
+xterm*eightBitInput:      false
+xterm*metaSendsEscape:    true
 
 !xterm*toolBar:           true
 !xterm*geometry:          1366x768               
