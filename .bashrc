@@ -7,12 +7,26 @@
 # Don't save commands which start with a space
 export HISTCONTROL=ignoredups:erasedups:ignorespace
 export HISTTIMEFORMAT="%Y/%m/%d %R "
+export HISTSIZE=10000
 export HISTFILESIZE=100000
 
 # Append to the history file, don't overwrite it
 shopt -s histappend
 
-PS1='\[\033[01;34m\]\u\[\033[1;31m\]@\[\033[1;32m\]\h\[\033[00;37m\]:\[\033[01;35m\]\w \A \[\033[00m\]$ '
+
+BOLD="$(tput bold)"
+RESET="$(tput sgr0)"
+
+RED="$(tput setaf 1)"
+GREEN="$(tput setaf 2)"
+YELLOW="$(tput setaf 3)"
+BLUE="$(tput setaf 4)"
+MAGENTA="$(tput setaf 5)"
+CYAN="$(tput setaf 6)"
+WHITE="$(tput setaf 7)"
+
+PS1='\[$BOLD\]\[$BLUE\]\u\[$RED\]@\[$GREEN\]\h:\[$MAGENTA\]\w \A\[$RESET\] $ '
+
 
 
 if [[ -f /etc/bash_completion ]]
