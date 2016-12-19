@@ -5,15 +5,14 @@ set nocompatible
 syntax on
 set background=dark
 
+" Alignment 
+match ColorColumn "\%81v."
+
 " Indentation/Tab 
 set autoindent
 set expandtab     
 set shiftwidth=4   
 set tabstop=4      
-
-" Alignment 
-set colorcolumn=81
-"match ColorColumn "\%80v."
 
 " Incremental and highlight search
 set incsearch
