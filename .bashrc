@@ -5,13 +5,14 @@
 
 # Don't put duplicate lines in the history
 # Don't save commands which start with a space
-export HISTCONTROL=ignoredups:erasedups:ignorespace
-export HISTTIMEFORMAT="%Y/%m/%d %R "
-export HISTSIZE=10000
-export HISTFILESIZE=100000
+HISTCONTROL=ignoredups:erasedups:ignorespace
+HISTTIMEFORMAT="%Y/%m/%d %R "
+HISTSIZE=10000
+HISTFILESIZE=10000
 
-# Append to the history file, don't overwrite it
-shopt -s histappend
+shopt -s histappend    # Append to the history file, don't overwrite it
+shopt -s histreedit    # Re-edit a failed history substitution
+shopt -s histverify    # Verify an history substitution before executing
 
 
 BOLD="$(tput bold)"
@@ -28,7 +29,6 @@ WHITE="$(tput setaf 7)"
 PS1='\[$BOLD\]\[$BLUE\]\u\[$RED\]@\[$GREEN\]\h:\[$MAGENTA\]\w \A\[$RESET\] $ '
 
 
-
 if [[ -f /etc/bash_completion ]]
 then
     source /etc/bash_completion
@@ -37,6 +37,12 @@ fi
 if [[ -r "$HOME/.bash_aliases" ]]
 then
     source "$HOME/.bash_aliases"
+fi
+
+if [[ -r "$HOME/.bash_functions" ]] 
+then
+    source "$HOME/.bash_functions"
+    PROMPT_COMMAND=_bash_history_sync
 fi
 
 if [[ -x /usr/bin/dircolors ]]
