@@ -26,8 +26,21 @@ MAGENTA="$(tput setaf 5)"
 CYAN="$(tput setaf 6)"
 WHITE="$(tput setaf 7)"
 
-PS1='\[$BOLD\]\[$BLUE\]\u\[$RED\]@\[$GREEN\]\h:\[$MAGENTA\]\w \A\[$RESET\] $ '
 
+PS1='\[$BOLD\]\[$BLUE\]\u\[$RED\]@\[$GREEN\]\h:\[$MAGENTA\]\w'
+
+if [[ -n "${SSH_CONNECTION:-}" ]]
+then
+    PS1="$PS1"'\[$RESET\]\[$CYAN\] [ssh]'
+fi
+
+if type -t __git_ps1 &>/dev/null  
+then  
+    PS1="$PS1"'\[$RESET\]\[$CYAN\]$(__git_ps1 " [%s]")'
+fi
+
+# End prompt
+PS1="$PS1"' \[$RESET\]$ '
 
 if [[ -f /etc/bash_completion ]]
 then
