@@ -1,0 +1,82 @@
+#+TITLE: Personal Emacs Configuration
+
+* Configuration
+** Emacs initialization
+*** Setup package manager
+    #+BEGIN_SRC emacs-lisp
+    (require 'package)
+    (setq package-enable-at-startup nil)
+
+    (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/" ))
+    (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
+    (package-initialize)
+    #+END_SRC
+*** Setup use-package
+    #+BEGIN_SRC emacs-lisp 
+    (unless (package-installed-p 'use-package)
+            (package-refresh-contents)
+            (package-install 'use-package))
+    #+END_SRC
+*** Startup settings
+    #+BEGIN_SRC emacs-lisp 
+    (setq use-file-dialog nil)
+    (setq use-dialog-box nil)
+    (setq inhibit-splash-screen t)
+    (setq inhibit-startup-message t)
+    (setq inhibit-startup-screen t)
+    (setq inhibit-startup-echo-area-message t)
+
+    (custom-set-variables
+        '(menu-bar-mode nil)     
+        '(tool-bar-mode nil)  
+        '(blink-cursor nil)  
+        '(line-number-mode t) 
+        '(column-number-mode t)
+    )
+    #+END_SRC
+** General configuration
+*** Backups
+    #+BEGIN_SRC emacs-lisp 
+    (setq 
+        backup-directory-alist '(("." . "~/.emacs.d/backups"))
+        delete-old-versions -1
+        version-control t
+        vc-make-backup-files t
+    )
+    #+END_SRC
+*** Evil mode
+    #+BEGIN_SRC emacs-lisp
+    (require 'evil)
+    (evil-mode t)
+    #+END_SRC
+*** Font size
+    #+BEGIN_SRC emacs-lisp
+    (global-set-key (kbd "C-+") 'text-scale-increase)
+    (global-set-key (kbd "C--") 'text-scale-decrease)
+    ;; C-x C-0 restores the default font size
+    #+END_SRC
+*** History
+    #+BEGIN_SRC emacs-lisp
+    (setq savehist-file "~/.emacs.d/savehist")
+    (savehist-mode 1)
+    (setq history-lenght t)
+    (setq history-delete-duplicates t)
+    #+END_SRC
+*** Load theme
+    #+BEGIN_SRC emacs-lisp
+    (load-theme 'tsdh-dark)  
+    #+END_SRC    	
+*** Symlink
+    #+BEGIN_SRC emacs-lisp
+    ;; This is not enable by default in emacs
+    (setq vc-follow-symlinks t)
+    #+END_SRC  
+*** Tabs
+    #+BEGIN_SRC emacs-lisp
+    (setq-default tab-width 4)
+    ;;(setq-default indent-tabs-mode t)    
+    #+END_SRC	
+*** Use y or n
+    #+BEGIN_SRC emacs-lisp 
+    (fset 'yes-or-no-p 'y-or-n-p)
+    #+END_SRC
