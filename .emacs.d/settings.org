@@ -46,8 +46,10 @@
     #+END_SRC
 *** Evil mode
     #+BEGIN_SRC emacs-lisp
-    (require 'evil)
-    (evil-mode t)
+    (use-package evil 
+        :ensure t
+        :init (evil-mode t)
+    )
     #+END_SRC
 *** Font size
     #+BEGIN_SRC emacs-lisp
