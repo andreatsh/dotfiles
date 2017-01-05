@@ -61,7 +61,7 @@
     #+BEGIN_SRC emacs-lisp
     (setq savehist-file "~/.emacs.d/savehist")
     (savehist-mode 1)
-    (setq history-lenght t)
+    (setq history-length t)
     (setq history-delete-duplicates t)
     #+END_SRC
 *** Load theme
