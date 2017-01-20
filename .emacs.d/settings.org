@@ -1,5 +1,11 @@
-#+TITLE: Personal Emacs Configuration
+#+TITLE: Personale Emacs Configuration
 
+* User information
+  #+BEGIN_SRC
+  (setq user-full-name    "Andrea Miglietta"
+        user-mail-address "andrea.miglietta92@gmail.com"
+  )
+  #+END_SRC
 * Configuration
 ** Emacs initialization
 *** Setup package manager
@@ -12,73 +18,245 @@
     (package-initialize)
     #+END_SRC
 *** Setup use-package
-    #+BEGIN_SRC emacs-lisp 
+    #+BEGIN_SRC emacs-lisp
     (unless (package-installed-p 'use-package)
             (package-refresh-contents)
             (package-install 'use-package))
     #+END_SRC
 *** Startup settings
-    #+BEGIN_SRC emacs-lisp 
+    #+BEGIN_SRC emacs-lisp
+    ;; Disable useless screens
     (setq use-file-dialog nil)
     (setq use-dialog-box nil)
-    (setq inhibit-splash-screen t)
-    (setq inhibit-startup-message t)
+    ;;(setq inhibit-splash-screen t)
+    ;;(setq inhibit-startup-message t)
     (setq inhibit-startup-screen t)
     (setq inhibit-startup-echo-area-message t)
 
-    (custom-set-variables
-        '(menu-bar-mode nil)     
-        '(tool-bar-mode nil)  
-        '(blink-cursor nil)  
-        '(line-number-mode t) 
-        '(column-number-mode t)
-    )
+    (setq indicate-empty-lines t)
+    (setq-default fill-column 80)
+
+    (setq default-directory (substitute-in-file-name "$HOME"))
+    (setq mouse-yank-at-point t)
     #+END_SRC
+**** Set variables
+     #+BEGIN_SRC emacs-lisp
+     (custom-set-variables
+       '(menu-bar-mode nil)
+       '(tool-bar-mode nil)
+       '(scroll-bar-mode nil)
+       '(blink-cursor nil)
+       '(line-number-mode t)
+       '(column-number-mode t)
+     )
+     #+END_SRC
 ** General configuration
 *** Backups
-    #+BEGIN_SRC emacs-lisp 
-    (setq 
+    #+BEGIN_SRC emacs-lisp
+    (setq
         backup-directory-alist '(("." . "~/.emacs.d/backups"))
-        delete-old-versions -1
-        version-control t
         vc-make-backup-files t
+        version-control t
+        kept-new-version 3
+        kept-old-version 1
+        delete-old-versions t
     )
     #+END_SRC
 *** Evil mode
     #+BEGIN_SRC emacs-lisp
-    (use-package evil 
+    (use-package evil
         :ensure t
         :init (evil-mode t)
     )
+
+    ;; Cursor
+    (setq
+        evil-insert-state-cursor '(box "white")
+        evil-normal-state-cursor '(box "white")
+        evil-visual-state-cursor '(hollow "white")
+    )
+
     #+END_SRC
+**** FIXME:
+    ;;(use-package evil-tabs
+    ;;    :ensure t
+    ;;    :config (global-evil-tabs-mode t)
+    ;;)
+
 *** Font size
     #+BEGIN_SRC emacs-lisp
+    (set-face-attribute 'default nil :height 100)
     (global-set-key (kbd "C-+") 'text-scale-increase)
     (global-set-key (kbd "C--") 'text-scale-decrease)
-    ;; C-x C-0 restores the default font size
     #+END_SRC
+*** Google Translate
+    #+BEGIN_SRC emacs-lisp
+    (use-package google-translate
+        :ensure t
+        :init
+        (require 'google-translate)
+        (require 'google-translate-smooth-ui)
+        :bind
+        (("\C-ct" . google-translate-smooth-translate))
+        :config
+        (setq google-translate-translation-directions-alist
+            '(("it" . "en") ("en" . "it")))
+    )
+    #+END_SRC
+*** Highlight
+    #+BEGIN_SRC emacs-lisp
+    (global-hl-line-mode)
+    (global-font-lock-mode t) ;; Turn on syntax highlighting whenever possible
+    #+END_SRC
+**** Parenthesis
+     #+BEGIN_SRC emacs-lisp
+     (show-paren-mode)         ; Automatically highlight paren pairs
+     (setq show-paren-delay 0) ; Show paren match immediately
+     #+END_SRC
 *** History
     #+BEGIN_SRC emacs-lisp
     (setq savehist-file "~/.emacs.d/savehist")
-    (savehist-mode 1)
+    (savehist-mode t)
     (setq history-length t)
     (setq history-delete-duplicates t)
     #+END_SRC
 *** Load theme
     #+BEGIN_SRC emacs-lisp
-    (load-theme 'tsdh-dark)  
-    #+END_SRC    	
+    (add-to-list 'custom-theme-load-path "~/.emacs.d")
+    (load-theme 'tsh-dark)
+    ;;(load-theme 'tsdh-dark)
+    #+END_SRC
+*** Ibuffer
+    #+BEGIN_SRC emacs-lisp
+    (global-set-key (kbd "C-x C-b") 'ibuffer)
+    (autoload 'ibuffer "ibuffer" "List buffers." t)
+    #+END_SRC
+*** Iflipb
+    Iflipb to switch buffers like in Windows with Alt+Tab
+    #+BEGIN_SRC emacs-lisp
+    (use-package iflipb
+        :ensure t
+        :bind
+        ("<M-tab>" . iflipb-next-buffer)
+        ("<M-iso-lefttab>" . iflipb-previous-buffer)
+    )
+    #+END_SRC
+*** Keybinding
+**** Evil-mode map
+     #+BEGIN_SRC emacs-lisp
+     (setq evil-toggle-key "")      ;; Remove default evil-toggle-key "C-z"
+     (global-unset-key (kbd "C-z")) ;; Remove "C-z" default behavior
+
+     (define-key evil-insert-state-map (kbd "C-a") 'smarter-move-beginning-of-line)
+     (define-key evil-insert-state-map (kbd "C-e") 'move-end-of-line)
+     #+END_SRC
+**** Global-set-key
+     #+BEGIN_SRC emacs-lisp
+     (global-set-key (kbd "RET") 'newline-and-indent )
+
+     (setq x-select-enable-primary t)
+     (setq x-select-enable-clipboard t)
+     (global-set-key (kbd "S-<ins>") 'mouse-yank-primary)
+     #+END_SRC
+**** Insert-date
+     #+BEGIN_SRC emacs-lisp
+     ;; Insert date
+     (defun insert-date ()
+         "Insert the current date."
+         (interactive)
+         (insert (format-time-string "%d.%m.%Y")))
+
+     (global-set-key (kbd "C-c d") 'insert-date)
+     #+END_SRC
+**** Org-mode map
+     #+BEGIN_SRC emacs-lips
+     (define-key org-mode-map (kbd "RET") nil)
+     (define-key org-mode-map (kbd "C-a") nil)
+     (define-key org-mode-map (kbd "M-<tab>") nil)
+     (define-key org-mode-map (kbd "M-<iso-lefttab>") nil)
+     #+END_SRC
+**** Smarter-move-beginning-of-line
+     #+BEGIN_SRC emacs-lisp
+     (defun smarter-move-beginning-of-line (arg)
+     "Move point back to indentation of beginning of line.
+
+     Move point to the first non-whitespace character on this line.
+     If point is already there, move to the beginning of the line.
+     Effectively toggle between the first non-whitespace character and
+     the beginning of the line.
+
+     If ARG is not nil or 1, move forward ARG - 1 lines first.  If
+     point reaches the beginning or end of the buffer, stop there."
+         (interactive "^p")
+         (setq arg (or arg 1))
+
+         ;; Move lines first
+         (when (/= arg 1)
+             (let ((line-move-visual nil))
+                (forward-line (1- arg))))
+
+         (let ((orig-point (point)))
+             (back-to-indentation)
+             (when (= orig-point (point))
+               (move-beginning-of-line 1))))
+
+     ;; Remap C-a to `smarter-move-beginning-of-line'
+     (global-set-key [remap move-beginning-of-line]
+                     'smarter-move-beginning-of-line)
+     #+END_SRC
 *** Symlink
     #+BEGIN_SRC emacs-lisp
     ;; This is not enable by default in emacs
     (setq vc-follow-symlinks t)
-    #+END_SRC  
-*** Tabs
+    #+END_SRC
+*** Sync
     #+BEGIN_SRC emacs-lisp
-    (setq-default tab-width 4)
-    ;;(setq-default indent-tabs-mode t)    
-    #+END_SRC	
+    ;; When something changes a file, automatically refresh the
+    ;; buffer containing that file so they can't get out of sync.
+    (global-auto-revert-mode t)
+    #+END_SRC
+*** Org-mode
+    #+BEGIN_SRC emacs-lisp
+    (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+    (add-to-list 'auto-mode-alist '("\\.org_archive\\'" . org-mode))
+
+    ;; Cuter bullets
+    (use-package org-bullets
+        :ensure t
+        :init
+        (setq org-bullets-bullet-list '("◉"))
+        (add-hook 'org-mode-hook (lambda () (org-bullets-mode t)))
+    )
+
+    ;;(setq org-ellipsis " …")
+    (setq org-ellipsis " »")
+
+    ;; Syntax highlighting in source blocks
+    (setq org-src-fontify-natively t)
+
+    ;; Hide markers when text is markup
+    (setq org-hide-emphasis-markers t)
+
+    #+END_SRC
+*** Whitespaces
+**** Tabs
+     #+BEGIN_SRC emacs-lisp
+     (setq-default indent-tabs-mode nil)
+     (setq tab-stop-list (number-sequence 4 120 4))
+     (setq-default tab-width 4)
+     #+END_SRC
+**** Trailing whitespace
+     #+BEGIN_SRC emacs-lisp
+     ;; Delete trailing whitespace automatically on save.
+     (add-hook 'before-save-hook 'delete-trailing-whitespace)
+     #+END_SRC
 *** Use y or n
-    #+BEGIN_SRC emacs-lisp 
+    #+BEGIN_SRC emacs-lisp
     (fset 'yes-or-no-p 'y-or-n-p)
+    #+END_SRC*** Keybinding
+** TEST
+*** Keybinding
+    #+BEGIN_SRC emacs-lisp
+    ;;(global-set-key (kbd "") 'other-window)
+    ;;(global-set-key (kbd "C-x k") 'kill-this-buffer)
     #+END_SRC
