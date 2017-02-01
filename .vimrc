@@ -1,25 +1,28 @@
 " Make Vim no Vi-compatible
-set nocompatible 
+set nocompatible
 
 " Enable syntax highlighting on a dark background
 syntax on
 set background=dark
 
-" Alignment 
+" Alignment
 match ColorColumn "\%81v."
 
-" Indentation/Tab 
+" Indentation/Tab
 set autoindent
-set expandtab     
-set shiftwidth=4   
-set tabstop=4      
+set expandtab
+set shiftwidth=4
+set tabstop=4
 
 " Incremental and highlight search
 set incsearch
 set hlsearch
+ 
+" Allow buffers to be hidden 
+set hidden 
 
 " Default history value is 20
-set history=100    
+set history=100
 
 " Press F12 before pasting text to avoid crazy indentation
 set pastetoggle=<F12>
@@ -27,18 +30,18 @@ set pastetoggle=<F12>
 " Show matching brackets.
 set showmatch
 
-" Enable wildmenu 
+" Enable wildmenu
 set wildmenu
 set wildignore+=*.o,*.x
 set wildignore+=*.swp,*.bak
 set wildignorecase
 set wildmode=full
 
-" Set backup 
+" Set backup
 if has("vms")
     set nobackup
 else
-    set backup 
+    set backup
     set backupdir=~/.vim/backup
     set directory=~/.vim/swap
 endif
@@ -51,12 +54,18 @@ endif
 " Load personal colorscheme
 colo tshdarkbg
 
-" Key mapping 
-nnoremap ;b :buffer *
+" Key mapping
+let mapleader = ";"
 inoremap <C-a> <Home>
 inoremap <C-e> <End>
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
+nnoremap <Leader>b :buffer *
+nnoremap <Leader>l :ls<CR>
+nnoremap <C-t>     :enew<CR>
+nnoremap <C-k>     :bn<CR>
+nnoremap <C-j>     :bp<CR>
+nnoremap <C-w>     :bdelete<CR>
 
 augroup Shebang
     autocmd BufNewFile *.sh 0put =\"#!/bin/bash\"|$
