@@ -31,6 +31,9 @@ floating_modifier $mod
 bindsym $mod+Return exec xterm
 #bindsym $mod+Shift+Return exec i3-sensible-terminal
 
+# Lock X display
+bindsym $mod+l exec xtrlock
+
 # Kill focused window
 bindsym $mod+Shift+q kill
 
@@ -142,3 +145,4 @@ bar {
     status_command    i3blocks -c ~/.config/i3/i3blocks.conf
     position          top
 }
+
