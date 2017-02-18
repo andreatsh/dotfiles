@@ -1,4 +1,4 @@
-#+TITLE: Personale Emacs Configuration
+#+TITLE: Personal Emacs Configuration
 
 * User information
   #+BEGIN_SRC
@@ -36,7 +36,7 @@
     (setq indicate-empty-lines t)
     (setq-default fill-column 80)
 
-    (setq default-directory (substitute-in-file-name "$HOME"))
+    (setq default-directory (substitute-in-file-name "$HOME/"))
     (setq mouse-yank-at-point t)
     #+END_SRC
 **** Set variables
@@ -62,9 +62,18 @@
         delete-old-versions t
     )
     #+END_SRC
+
+*** Diminish
+    To not have the modeline full of minor modes I use globally
+    #+BEGIN_SRC emacs-lisp
+    (use-package diminish
+        :ensure t
+    )
+    #+END_SRC
 *** Evil mode
     #+BEGIN_SRC emacs-lisp
     (use-package evil
+        :diminish
         :ensure t
         :init (evil-mode t)
     )
@@ -76,16 +85,15 @@
         evil-visual-state-cursor '(hollow "white")
     )
 
-    #+END_SRC
-**** FIXME:
+    ;;FIXME:
     ;;(use-package evil-tabs
     ;;    :ensure t
     ;;    :config (global-evil-tabs-mode t)
     ;;)
-
+    #+END_SRC
 *** Font size
     #+BEGIN_SRC emacs-lisp
-    (set-face-attribute 'default nil :height 100)
+    (set-face-attribute 'default nil :height 90)
     (global-set-key (kbd "C-+") 'text-scale-increase)
     (global-set-key (kbd "C--") 'text-scale-decrease)
     #+END_SRC
@@ -111,7 +119,7 @@
 **** Parenthesis
      #+BEGIN_SRC emacs-lisp
      (show-paren-mode)         ; Automatically highlight paren pairs
-     (setq show-paren-delay 0) ; Show paren match immediately
+     (setq show-paren-delay 0.0) ; Show paren match immediately
      #+END_SRC
 *** History
     #+BEGIN_SRC emacs-lisp
@@ -122,8 +130,8 @@
     #+END_SRC
 *** Load theme
     #+BEGIN_SRC emacs-lisp
-    (add-to-list 'custom-theme-load-path "~/.emacs.d")
-    (load-theme 'tsh-dark)
+;;    (add-to-list 'custom-theme-load-path "~/.emacs.d")
+;;    (load-theme 'tsh-dark t)
     ;;(load-theme 'tsdh-dark)
     #+END_SRC
 *** Ibuffer
@@ -132,13 +140,10 @@
     (autoload 'ibuffer "ibuffer" "List buffers." t)
     #+END_SRC
 *** Iflipb
-    Iflipb to switch buffers like in Windows with Alt+Tab
+    Iflipb to switch buffers
     #+BEGIN_SRC emacs-lisp
     (use-package iflipb
         :ensure t
-        :bind
-        ("<M-tab>" . iflipb-next-buffer)
-        ("<M-iso-lefttab>" . iflipb-previous-buffer)
     )
     #+END_SRC
 *** Keybinding
@@ -146,9 +151,15 @@
      #+BEGIN_SRC emacs-lisp
      (setq evil-toggle-key "")      ;; Remove default evil-toggle-key "C-z"
      (global-unset-key (kbd "C-z")) ;; Remove "C-z" default behavior
+     (global-unset-key (kbd "C-k")) ;; Remove "C-z" default behavior
 
      (define-key evil-insert-state-map (kbd "C-a") 'smarter-move-beginning-of-line)
      (define-key evil-insert-state-map (kbd "C-e") 'move-end-of-line)
+
+     (define-key evil-insert-state-map (kbd "C-k") 'iflipb-next-buffer)
+     (define-key evil-insert-state-map (kbd "C-j") 'iflipb-previous-buffer)
+     (define-key evil-normal-state-map (kbd "C-k") 'iflipb-next-buffer)
+     (define-key evil-normal-state-map (kbd "C-j") 'iflipb-previous-buffer)
      #+END_SRC
 **** Global-set-key
      #+BEGIN_SRC emacs-lisp
@@ -216,28 +227,27 @@
     (global-auto-revert-mode t)
     #+END_SRC
 *** Org-mode
-    #+BEGIN_SRC emacs-lisp
-    (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
-    (add-to-list 'auto-mode-alist '("\\.org_archive\\'" . org-mode))
+     #+BEGIN_SRC emacs-lisp
+     (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+     (add-to-list 'auto-mode-alist '("\\.org_archive\\'" . org-mode))
 
-    ;; Cuter bullets
-    (use-package org-bullets
-        :ensure t
-        :init
-        (setq org-bullets-bullet-list '("◉"))
-        (add-hook 'org-mode-hook (lambda () (org-bullets-mode t)))
-    )
+     ;; Cuter bullets
+     (use-package org-bullets
+         :ensure t
+         :init
+         (setq org-bullets-bullet-list '("◉"))
+         (add-hook 'org-mode-hook (lambda () (org-bullets-mode t)))
+     )
 
-    ;;(setq org-ellipsis " …")
-    (setq org-ellipsis " »")
+     (setq org-ellipsis " »")
 
-    ;; Syntax highlighting in source blocks
-    (setq org-src-fontify-natively t)
+     ;; Syntax highlighting in source blocks
+     (setq org-src-fontify-natively t)
 
-    ;; Hide markers when text is markup
-    (setq org-hide-emphasis-markers t)
+     ;; Hide markers when text is markup
+     (setq org-hide-emphasis-markers t)
 
-    #+END_SRC
+     #+END_SRC
 *** Whitespaces
 **** Tabs
      #+BEGIN_SRC emacs-lisp
@@ -253,10 +263,5 @@
 *** Use y or n
     #+BEGIN_SRC emacs-lisp
     (fset 'yes-or-no-p 'y-or-n-p)
-    #+END_SRC*** Keybinding
-** TEST
-*** Keybinding
-    #+BEGIN_SRC emacs-lisp
-    ;;(global-set-key (kbd "") 'other-window)
-    ;;(global-set-key (kbd "C-x k") 'kill-this-buffer)
     #+END_SRC
+** TEST
