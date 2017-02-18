@@ -1,5 +1,5 @@
 !
-! xterm configuration file 
+! xterm configuration file
 ! user: andreatsh
 !
 
@@ -12,9 +12,12 @@ xterm*pointerColor:       red
 
 xterm*termName:           xterm-256color
 xterm*faceName:           Monospace:pixelsize=11
-xterm*saveLines:          4096
 
-xterm*jumpScroll:         true 
+xterm*loginShell:         true
+xterm*saveLines:          4096
+xterm*scrollBar:          false
+
+xterm*jumpScroll:         true
 xterm*multiScroll:        true
 xterm*fastScroll:         true
 
@@ -24,10 +27,9 @@ xterm*bellSuppressTime:   100
 xterm*dynamicColors:      true
 xterm*scrollTtyKeypress:  true
 xterm*scrollTtyOutput:    true
-xterm*loginShell:         true
 
 xterm*eightBitInput:      false
 xterm*metaSendsEscape:    true
 
 !xterm*toolBar:           true
-!xterm*geometry:          1366x768               
+!xterm*geometry:          1366x768
