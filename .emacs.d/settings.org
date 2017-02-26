@@ -23,6 +23,19 @@
             (package-refresh-contents)
             (package-install 'use-package))
     #+END_SRC
+**** Autoupdate
+     #+BEGIN_SRC emacs-lisp
+     (use-package auto-package-update
+        :ensure t
+        :init
+        (setq auto-package-update-interval 7)
+        (setq auto-package-update-delete-old-versions t)
+        (add-hook 'auto-package-update-before-hook
+            (lambda () (message "I will update packages now")))
+        ;; Update at startup
+        (auto-package-update-maybe)
+     )
+     #+END_SRC
 *** Startup settings
     #+BEGIN_SRC emacs-lisp
     ;; Disable useless screens
