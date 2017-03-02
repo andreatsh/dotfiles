@@ -47,11 +47,18 @@
     (setq inhibit-startup-echo-area-message t)
 
     (setq indicate-empty-lines t)
+    (add-hook 'text-mode-hook 'auto-fill-mode)
     (setq-default fill-column 80)
 
     (setq default-directory (substitute-in-file-name "$HOME/"))
     (setq mouse-yank-at-point t)
-    #+END_SRC
+
+    ;; Show a marker in the left fringe for lines not in the buffer
+    (setq indicate-empty-lines t)
+    ;; Shrink fringes to 1 pixel
+    (fringe-mode 1)
+
+   #+END_SRC
 **** Set variables
      #+BEGIN_SRC emacs-lisp
      (custom-set-variables
@@ -73,9 +80,9 @@
         kept-new-version 3
         kept-old-version 1
         delete-old-versions t
+        backup-by-copying t
     )
     #+END_SRC
-
 *** Diminish
     To not have the modeline full of minor modes I use globally
     #+BEGIN_SRC emacs-lisp
@@ -110,6 +117,26 @@
     (global-set-key (kbd "C-+") 'text-scale-increase)
     (global-set-key (kbd "C--") 'text-scale-decrease)
     #+END_SRC
+*** Git-gutter+
+    #+BEGIN_SRC emacs-lisp
+    (use-package git-gutter+
+        :diminish
+        :defer t
+        :init
+        (global-git-gutter+-mode)
+    )
+    (setq git-gutter+-window-width 1)
+    (setq git-gutter+-modified-sign "◉")
+    (setq git-gutter+-added-sign "◉")
+    (setq git-gutter+-deleted-sign "◉")
+
+    (set-face-foreground 'git-gutter+-modified "purple")
+    (set-face-foreground 'git-gutter+-added "green")
+    (set-face-foreground 'git-gutter+-deleted "red")
+
+    (global-set-key (kbd "C-x g") 'git-gutter+-mode) ; Turn on/off in the current buffer
+    (global-set-key (kbd "C-x G") 'global-git-gutter+-mode) ; Turn on/off globally
+    #+END_SRC
 *** Google Translate
     #+BEGIN_SRC emacs-lisp
     (use-package google-translate
@@ -143,14 +170,21 @@
     #+END_SRC
 *** Load theme
     #+BEGIN_SRC emacs-lisp
-;;    (add-to-list 'custom-theme-load-path "~/.emacs.d")
-;;    (load-theme 'tsh-dark t)
-    ;;(load-theme 'tsdh-dark)
+    (use-package color-theme-sanityinc-solarized
+        :ensure t
+        :init
+        (load-theme 'sanityinc-solarized-dark t)
+    )
     #+END_SRC
 *** Ibuffer
     #+BEGIN_SRC emacs-lisp
     (global-set-key (kbd "C-x C-b") 'ibuffer)
     (autoload 'ibuffer "ibuffer" "List buffers." t)
+    #+END_SRC
+*** Ido
+    #+BEGIN_SRC emacs-lisp
+;;    (require 'ido)
+;;    (ido-mode t)
     #+END_SRC
 *** Iflipb
     Iflipb to switch buffers
@@ -168,6 +202,10 @@
 
      (define-key evil-insert-state-map (kbd "C-a") 'smarter-move-beginning-of-line)
      (define-key evil-insert-state-map (kbd "C-e") 'move-end-of-line)
+     (define-key evil-normal-state-map (kbd "C-a") 'smarter-move-beginning-of-line)
+     (define-key evil-normal-state-map (kbd "C-e") 'move-end-of-line)
+
+     (define-key evil-insert-state-map (kbd "RET") 'newline-and-indent)
 
      (define-key evil-insert-state-map (kbd "C-k") 'iflipb-next-buffer)
      (define-key evil-insert-state-map (kbd "C-j") 'iflipb-previous-buffer)
@@ -176,6 +214,7 @@
      #+END_SRC
 **** Global-set-key
      #+BEGIN_SRC emacs-lisp
+     (global-set-key (kbd "<F5>") 'revert-buffer)
      (global-set-key (kbd "RET") 'newline-and-indent )
 
      (setq x-select-enable-primary t)
@@ -196,8 +235,6 @@
      #+BEGIN_SRC emacs-lips
      (define-key org-mode-map (kbd "RET") nil)
      (define-key org-mode-map (kbd "C-a") nil)
-     (define-key org-mode-map (kbd "M-<tab>") nil)
-     (define-key org-mode-map (kbd "M-<iso-lefttab>") nil)
      #+END_SRC
 **** Smarter-move-beginning-of-line
      #+BEGIN_SRC emacs-lisp
