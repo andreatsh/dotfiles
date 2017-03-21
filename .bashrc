@@ -34,9 +34,16 @@ then
     PS1="$PS1"'\[$RESET\]\[$CYAN\] [ssh]'
 fi
 
+if ! type -t __git_ps1 &>/dev/null && [ -e /usr/share/git-core/contrib/completion/git-prompt.sh ]
+then
+    source /usr/share/git-core/contrib/completion/git-prompt.sh
+fi
+
 if type -t __git_ps1 &>/dev/null  
 then  
     PS1="$PS1"'\[$RESET\]\[$CYAN\]$(__git_ps1 " [%s]")'
+    export GIT_PS1_SHOWDIRTYSTATE=1
+    export GIT_PS1_SHOWUNTRACKEDFILES=1
 fi
 
 # End prompt
