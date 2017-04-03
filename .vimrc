@@ -18,8 +18,8 @@ set tabstop=4
 set incsearch
 set hlsearch
  
-" Allow buffers to be hidden 
-set hidden 
+" Allow buffers to be hidden
+set hidden
 
 " Default history value is 20
 set history=100
@@ -48,7 +48,10 @@ endif
 
 " Jump to the last position when reopening a file
 if has("autocmd")
-	au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+    au BufReadPost * 
+    \ if line("'\"") > 1 && line("'\"") <= line("$") | 
+    \    exe "normal! g'\"" | 
+    \ endif
 endif
 
 " Load personal colorscheme
@@ -62,10 +65,11 @@ cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 nnoremap <Leader>b :buffer *
 nnoremap <Leader>l :ls<CR>
-nnoremap <C-t>     :enew<CR>
-nnoremap <C-k>     :bn<CR>
-nnoremap <C-j>     :bp<CR>
-nnoremap <C-w>     :bdelete<CR>
+nnoremap <S-k>     :bn<CR>
+nnoremap <S-j>     :bp<CR>
+nnoremap <Leader>k :bdelete<CR>
+nnoremap <Leader>v :vsplit<CR>
+nnoremap <F5>      :e!<CR>
 
 augroup Shebang
     autocmd BufNewFile *.sh 0put =\"#!/bin/bash\"|$
