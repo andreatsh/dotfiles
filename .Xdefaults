@@ -11,7 +11,8 @@ xterm*pointerShape:       left_ptr
 xterm*pointerColor:       red
 
 xterm*termName:           xterm-256color
-xterm*faceName:           Monospace:pixelsize=11
+xterm*faceName:           Monospace
+xterm*faceSize:           11
 
 xterm*loginShell:         true
 xterm*saveLines:          4096
@@ -32,4 +33,4 @@ xterm*eightBitInput:      false
 xterm*metaSendsEscape:    true
 
 !xterm*toolBar:           true
-!xterm*geometry:          1366x768
+!xterm*geometry:          1920x1080
