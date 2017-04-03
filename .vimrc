@@ -30,6 +30,11 @@ set pastetoggle=<F12>
 " Show matching brackets.
 set showmatch
 
+" Always show status bar
+set laststatus=2 
+set statusline=%<\ %{expand('%:h')}/%t%m%r%=%-14.(%l,%c%V%)\ %p%%
+"set statusline=%<\ %F%m%r%=%-14.(%l,%c%V%)\ %p%%
+
 " Enable wildmenu
 set wildmenu
 set wildignore+=*.o,*.x
