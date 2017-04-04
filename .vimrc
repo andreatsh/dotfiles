@@ -17,7 +17,7 @@ set tabstop=4
 " Incremental and highlight search
 set incsearch
 set hlsearch
- 
+
 " Allow buffers to be hidden
 set hidden
 
@@ -31,7 +31,7 @@ set pastetoggle=<F12>
 set showmatch
 
 " Always show status bar
-set laststatus=2 
+set laststatus=2
 set statusline=%<\ %{expand('%:h')}/%t%m%r%=%-14.(%l,%c%V%)\ %p%%
 "set statusline=%<\ %F%m%r%=%-14.(%l,%c%V%)\ %p%%
 
@@ -53,9 +53,9 @@ endif
 
 " Jump to the last position when reopening a file
 if has("autocmd")
-    au BufReadPost * 
-    \ if line("'\"") > 1 && line("'\"") <= line("$") | 
-    \    exe "normal! g'\"" | 
+    au BufReadPost *
+    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+    \    exe "normal! g'\"" |
     \ endif
 endif
 
@@ -80,4 +80,13 @@ augroup Shebang
     autocmd BufNewFile *.sh 0put =\"#!/bin/bash\"|$
     autocmd BufNewFile *.py 0put =\"#!/usr/bin/python\"|$
 augroup END
+
+" Removes trailing spaces
+function! TrimWhiteSpaces()
+    if search('\s\+$','bn') > 0
+        %s/\s\+$//
+    endif
+endfunction
+
+autocmd BufWritePre * call TrimWhiteSpaces()
 
