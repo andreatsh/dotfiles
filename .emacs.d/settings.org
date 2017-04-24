@@ -113,7 +113,7 @@
     #+END_SRC
 *** Font size
     #+BEGIN_SRC emacs-lisp
-    (set-face-attribute 'default nil :height 90)
+    (set-face-attribute 'default nil :height 110)
     (global-set-key (kbd "C-+") 'text-scale-increase)
     (global-set-key (kbd "C--") 'text-scale-decrease)
     #+END_SRC
@@ -121,7 +121,7 @@
     #+BEGIN_SRC emacs-lisp
     (use-package git-gutter+
         :diminish
-        :defer t
+        :ensure t
         :init
         (global-git-gutter+-mode)
     )
@@ -215,7 +215,7 @@
 **** Global-set-key
      #+BEGIN_SRC emacs-lisp
      (global-set-key (kbd "<F5>") 'revert-buffer)
-     (global-set-key (kbd "RET") 'newline-and-indent )
+     (global-set-key (kbd "RET") 'newline-and-indent)
 
      (setq x-select-enable-primary t)
      (setq x-select-enable-clipboard t)
@@ -297,6 +297,7 @@
      ;; Hide markers when text is markup
      (setq org-hide-emphasis-markers t)
 
+     (setq org-log-done 'time)
      #+END_SRC
 *** Whitespaces
 **** Tabs
