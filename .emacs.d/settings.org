@@ -198,7 +198,6 @@
      #+BEGIN_SRC emacs-lisp
      (setq evil-toggle-key "")      ;; Remove default evil-toggle-key "C-z"
      (global-unset-key (kbd "C-z")) ;; Remove "C-z" default behavior
-     (global-unset-key (kbd "C-k")) ;; Remove "C-z" default behavior
 
      (define-key evil-insert-state-map (kbd "C-a") 'smarter-move-beginning-of-line)
      (define-key evil-insert-state-map (kbd "C-e") 'move-end-of-line)
@@ -207,10 +206,10 @@
 
      (define-key evil-insert-state-map (kbd "RET") 'newline-and-indent)
 
-     (define-key evil-insert-state-map (kbd "C-k") 'iflipb-next-buffer)
-     (define-key evil-insert-state-map (kbd "C-j") 'iflipb-previous-buffer)
-     (define-key evil-normal-state-map (kbd "C-k") 'iflipb-next-buffer)
-     (define-key evil-normal-state-map (kbd "C-j") 'iflipb-previous-buffer)
+     (define-key evil-insert-state-map (kbd "M-k") 'iflipb-next-buffer)
+     (define-key evil-insert-state-map (kbd "M-j") 'iflipb-previous-buffer)
+     (define-key evil-normal-state-map (kbd "M-k") 'iflipb-next-buffer)
+     (define-key evil-normal-state-map (kbd "M-j") 'iflipb-previous-buffer)
      #+END_SRC
 **** Global-set-key
      #+BEGIN_SRC emacs-lisp
