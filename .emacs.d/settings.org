@@ -264,17 +264,6 @@
      (global-set-key [remap move-beginning-of-line]
                      'smarter-move-beginning-of-line)
      #+END_SRC
-*** Symlink
-    #+BEGIN_SRC emacs-lisp
-    ;; This is not enable by default in emacs
-    (setq vc-follow-symlinks t)
-    #+END_SRC
-*** Sync
-    #+BEGIN_SRC emacs-lisp
-    ;; When something changes a file, automatically refresh the
-    ;; buffer containing that file so they can't get out of sync.
-    (global-auto-revert-mode t)
-    #+END_SRC
 *** Org-mode
      #+BEGIN_SRC emacs-lisp
      (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
@@ -290,6 +279,16 @@
 
      (setq org-ellipsis " »")
 
+     ;; Don't ask for confirmation
+     (setq org-confirm-babel-evaluate nil)
+     ;; Active Babel Languages
+     (org-babel-do-load-languages
+         'org-babel-load-languages
+           '((emacs-lisp . t)
+             (latex . t)
+             (sh . t)
+     ))
+
      ;; Syntax highlighting in source blocks
      (setq org-src-fontify-natively t)
 
@@ -298,6 +297,17 @@
 
      (setq org-log-done 'time)
      #+END_SRC
+*** Symlink
+    #+BEGIN_SRC emacs-lisp
+    ;; This is not enable by default in emacs
+    (setq vc-follow-symlinks t)
+    #+END_SRC
+*** Sync
+    #+BEGIN_SRC emacs-lisp
+    ;; When something changes a file, automatically refresh the
+    ;; buffer containing that file so they can't get out of sync.
+    (global-auto-revert-mode t)
+    #+END_SRC
 *** Whitespaces
 **** Tabs
      #+BEGIN_SRC emacs-lisp
