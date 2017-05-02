@@ -14,13 +14,15 @@ dotfiles = .bashrc         \
            .pythonrc       \
            .vim            \
            .vimrc          \
-           .Xdefaults
+           .xbindkeysrc    \
+           .Xdefaults      \
+           .xinitrc
 
 dotlinks = $(addprefix $(HOMEDIR)/,$(dotfiles))
 
 
 .PHONY: all
-all: backup clean install 
+all: backup clean install
 
 .PHONY: backup
 backup:
