@@ -1,0 +1,10 @@
+"amixer -q sset Master toggle"
+    m:0x0 + c:121
+"amixer -q -M sset Master 5%-"
+    m:0x0 + c:122
+"amixer -q -M sset Master 5%+"
+    m:0x0 + c:123
+"light -U 5"
+    m:0x0 + c:232
+"light -A 5"
+    m:0x0 + c:233
