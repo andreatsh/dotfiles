@@ -3,7 +3,7 @@
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:DejaVu Sans 8
+font pango:DejaVu Sans 10
 
 set $mod Mod4
 
@@ -11,6 +11,7 @@ focus_follows_mouse yes
 
 exec --no-startup-id feh --bg-fill /home/andreatsh/.config/i3/background001.jpg
 exec --no-startup-id redshift
+exec --no-startup-id exec xbindkeys
 exec --no-startup-id xterm
 
 # Assign some programs to a specific workspace
@@ -22,7 +23,7 @@ for_window [class="^XTerm$"] border pixel 1
 for_window [class="^Emacs$"] border pixel 1
 
 # Screenshots
-bindsym $mod+Control+p exec "scrot -e 'mv $f ~/.screenshots/' 2>/dev/null"
+bindsym Print exec "scrot -e 'mv $f ~/.screenshots/' 2>/dev/null"
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -32,7 +33,7 @@ bindsym $mod+Return exec xterm
 #bindsym $mod+Shift+Return exec i3-sensible-terminal
 
 # Lock X display
-bindsym $mod+l exec xtrlock
+bindsym Mod4+l exec xtrlock
 
 # Kill focused window
 bindsym $mod+Shift+q kill
