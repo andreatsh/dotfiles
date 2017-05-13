@@ -33,7 +33,7 @@ bindsym $mod+Return exec xterm
 #bindsym $mod+Shift+Return exec i3-sensible-terminal
 
 # Lock X display
-bindsym Mod4+l exec xtrlock
+bindsym Mod4+l exec xtrlock -b
 
 # Kill focused window
 bindsym $mod+Shift+q kill
