@@ -11,3 +11,5 @@
 	editor = vim
 [alias]
 	l = log --color --abbrev-commit --graph --decorate --relative-date
+[push]
+	default = simple
