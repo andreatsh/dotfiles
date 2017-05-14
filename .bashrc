@@ -39,8 +39,8 @@ then
     source /usr/share/git-core/contrib/completion/git-prompt.sh
 fi
 
-if type -t __git_ps1 &>/dev/null  
-then  
+if type -t __git_ps1 &>/dev/null
+then
     PS1="$PS1"'\[$RESET\]\[$CYAN\]$(__git_ps1 " [%s]")'
     export GIT_PS1_SHOWDIRTYSTATE=1
     export GIT_PS1_SHOWUNTRACKEDFILES=1
@@ -59,7 +59,7 @@ then
     source "$HOME/.bash_aliases"
 fi
 
-if [[ -r "$HOME/.bash_functions" ]] 
+if [[ -r "$HOME/.bash_functions" ]]
 then
     source "$HOME/.bash_functions"
     PROMPT_COMMAND=_bash_history_sync
@@ -77,4 +77,3 @@ fi
 
 export EDITOR="/usr/bin/vim"
 export PYTHONSTARTUP="$HOME/.pythonrc"
-
