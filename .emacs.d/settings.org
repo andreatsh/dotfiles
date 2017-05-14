@@ -297,6 +297,17 @@
 
      (setq org-log-done 'time)
      #+END_SRC
+**** Org-tree-slide
+     #+BEGIN_SRC emacs-lisp
+     (use-package org-tree-slide
+         :ensure t
+         :init
+         (define-key org-mode-map (kbd "<f8>") 'org-tree-slide-mode)
+         :config
+         (define-key org-tree-slide-mode-map (kbd "<f9>") 'org-tree-slide-move-previous-tree)
+         (define-key org-tree-slide-mode-map (kbd "<f10>") 'org-tree-slide-move-next-tree)
+     )
+     #+END_SRC
 *** Symlink
     #+BEGIN_SRC emacs-lisp
     ;; This is not enable by default in emacs
