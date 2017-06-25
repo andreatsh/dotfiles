@@ -35,3 +35,8 @@ function swap() {
     mv "$TMPFILE" "$2"
 }
 
+function bck() {
+    [ ! -e "$1" ] && echo "bck: $1 file not found" && return 1
+    cp "$1" "$1_$(date +%Y%m%d-%H%M%S)"
+}
+
